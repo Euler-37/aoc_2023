@@ -5,8 +5,6 @@ program main
    character(len=1000)::str
    integer::ios,i,j,num,idx(0:9),jdx(0:9),k
    character(len=10),parameter::a(*)=[character(len=10)::"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-   real(8)::tic
-   tic=clock()
    open(10,file="data/1.txt")
    num=0
    do
@@ -47,5 +45,4 @@ program main
    end do
    close(10)
    write(*,*)num
-   write(*,*)clock()-tic
 end program main
