@@ -1,0 +1,18 @@
+name = "aoc_2023"
+version = "0.1.0"
+license = "license"
+author = "Euler-37"
+maintainer = "1943133009@qq.com"
+copyright = "Copyright 2023, Euler-37"
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+module-naming = false
+[install]
+library = false
+[fortran]
+implicit-typing = false
+implicit-external = false
+source-form = "free"
+
