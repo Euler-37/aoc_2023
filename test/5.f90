@@ -50,11 +50,13 @@ program main
       end do
       num=min(num,si)
    end do
+   !if(this_image()==1)write(*,*)num
    write(*,*)num
    !
    num=huge(num)
    do i=1,n,2
       !$omp parallel do reduction(min:num)default(private)shared(map,seed)num_threads(20)
+      !do ii=seed(i),seed(i)+seed(i+1)-1,num_images()
       do ii=seed(i),seed(i)+seed(i+1)-1
          si=ii
          do j=1,7
@@ -69,7 +71,10 @@ program main
          end do
          num=min(num,si)
       end do
+      !call co_min(num,result_image=1)
+      !call co_broadcast(num,source_image=1)
       !$omp end parallel do
    end do
+   !if(this_image()==1)write(*,*)num
    write(*,*)num
 end program main
