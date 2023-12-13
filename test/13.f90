@@ -1,10 +1,10 @@
 program main
+   use string_mod
    implicit none
    character(len=100)::str
    integer::lens,i,ios,num,j,n,m,is,num1
    character(len=:),allocatable::a
-   character(len=1),allocatable::pa(:)
-   character(len=1),allocatable::pb(:,:)
+   character(len=1),pointer::pb(:,:)
    open(10,file="data/13.txt")
    num=0
    num1=0
@@ -23,8 +23,7 @@ program main
          a=a//str(1:lens)
       end do
       m=len(a)/n
-      allocate(pb(n,m))
-      pb(:,:)=reshape(string2array(a),shape=[n,m])
+      pb=>string_view2d(a,n,m)
       do i=1,m-1
          if(2*i>m)exit
          is=count(pb(:,1:i)/=pb(:,2*i:i+1:-1))
@@ -61,17 +60,7 @@ program main
             num1=num1+(i-1)
          end if
       end do
-      deallocate(pb)
    end do
    write(*,*)num
    write(*,*)num1
-contains
-   function string2array(a)result(b)
-      character(len=*),intent(in)::a
-      character(1)::b(len_trim(a))
-      integer::i
-      do i=1,len_trim(a)
-         b(i)=a(i:i)
-      end do
-   end function string2array
 end program main
