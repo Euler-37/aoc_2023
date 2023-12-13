@@ -14,6 +14,7 @@ module string_mod
       module procedure split_str
       module procedure split_string
    end interface
+
 contains
    elemental integer function size_string(this)result(res)
       class(string),intent(in)::this
@@ -88,6 +89,14 @@ contains
        character(len=1),intent(in),target::s(*)
        integer,intent(in)::n
        character(len=1),pointer::res(:)
-       res=>s(1:n)
+       res(1:n)=>s(1:n)
     end function string_view
+
+    function string_view2d(s,n,m)result(res)
+       character(len=1),intent(in),target::s(*)
+       integer,intent(in)::n,m
+       character(len=1),pointer::res(:,:)
+       res(1:n,1:m)=>s(1:n*m)
+    end function string_view2d
+
 end module string_mod
