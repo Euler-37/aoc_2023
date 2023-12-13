@@ -14,14 +14,14 @@ program main
       str=""
       read(10,"(A)",iostat=ios)str
       if(is_iostat_end(ios))exit
-      a=split(str,":")
+      a=split(str,":",.false.)
       idx=tonum(a(1)%str(6:))
-      a=split(a(2),";")
+      a=split(a(2),";",.false.)
       rgb=0
       do i=1,size(a)
-         b=split(a(i),",")
+         b=split(a(i),",",.false.)
          do j=1,size(b)
-            c=split(b(j)," ")
+            c=split(b(j)," ",.false.)
             select case(c(2)%str)
             case("red")   ; rgb(1)=max(rgb(1),tonum(c(1)%str))
             case("green") ; rgb(2)=max(rgb(2),tonum(c(1)%str))
