@@ -12,7 +12,7 @@ program main
       integer,allocatable::len(:)
    end type box
    type(box)::a(0:255)
-   open(10,file="data/test15.txt",form="unformatted",access="stream")
+   open(10,file="data/15.txt",form="unformatted",access="stream")
    inquire(10,size=lens)
    allocate(character(len=lens-1)::str)
    read(10)str
