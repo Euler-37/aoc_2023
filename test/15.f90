@@ -33,7 +33,7 @@ program main
          j=hash(s(i)%str(1:lens-1))
          idx=findloc(a(j)%key,s(i)%str(1:lens-1),1)
          if(idx==0)cycle
-         a(j)%key=[a(j)%key(1:idx-1),a(j)%key(idx+1:)]
+         a(j)%key=[character(len=10)::a(j)%key(1:idx-1),a(j)%key(idx+1:)]
          a(j)%len=[a(j)%len(1:idx-1),a(j)%len(idx+1:)]
       else
          n=tonum(s(i)%str(lens:lens))
