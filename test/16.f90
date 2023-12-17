@@ -60,6 +60,7 @@ contains
             if(all(pos>0).and.all(pos<n+1))then
                if(s(pos(1),pos(2))==".")then
                   flag(pos(1),pos(2))=1
+                  direc(id,pos(1),pos(2))=1
                else
                   call dfs(s,id,pos)
                   exit
