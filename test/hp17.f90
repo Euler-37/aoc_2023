@@ -19,7 +19,7 @@ program main
       read(10,"("//tostring(n)//"i1)")(a(i,j),j=1,n)
    end do
    close(10)
-   call dijkstra_heap(.false.)
+   !call dijkstra_heap(.false.)
    call dijkstra_heap(.true.)
 contains
    logical function flag_eq(a,b)result(res)
@@ -33,20 +33,18 @@ contains
       integer::idx,res
       integer::ix,iy,jx,jy
       logical::ultra
+      integer::flag(0:4,11,n,n)
       call m%init(n*n*(12*5),node(0,0,0,0,0))
       call m%insert(node(0,1,1,0,0), eq, cmp, sw)
       ps=0
+      flag=0
       do while(m%size>0)
          call m%pop(cmp, sw, eq, x)
-         idx=0
-         do i=1,ps
-            if(flag_eq(ff(i),x))then
-               idx=i
-            end if
-         end do
+         idx=flag(x%mv,x%step,x%ix,x%iy)
          if(idx/=0)cycle
          ps=ps+1
          ff(ps)=x
+         flag(x%mv,x%step,x%ix,x%iy)=1
          do i=1,4
             jx=x%ix+mv(1,i)
             jy=x%iy+mv(2,i)
