@@ -19,6 +19,7 @@ program main
       read(10,"("//tostring(n)//"i1)")(a(i,j),j=1,n)
    end do
    close(10)
+   call dijkstra_heap(.false.)
    call dijkstra_heap(.true.)
 contains
    logical function flag_eq(a,b)result(res)
