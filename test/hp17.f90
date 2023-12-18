@@ -12,6 +12,7 @@ program main
       integer::ix,iy
       integer::mv,step
    end type node
+   integer::flag(0:4,0:11,n,n)
    type(node)::ff(n*n*(12*5))
    integer::ps
    open(10,file="data/17.txt")
@@ -19,7 +20,7 @@ program main
       read(10,"("//tostring(n)//"i1)")(a(i,j),j=1,n)
    end do
    close(10)
-   !call dijkstra_heap(.false.)
+   call dijkstra_heap(.false.)
    call dijkstra_heap(.true.)
 contains
    logical function flag_eq(a,b)result(res)
@@ -33,7 +34,6 @@ contains
       integer::idx,res
       integer::ix,iy,jx,jy
       logical::ultra
-      integer::flag(0:4,11,n,n)
       call m%init(n*n*(12*5),node(0,0,0,0,0))
       call m%insert(node(0,1,1,0,0), eq, cmp, sw)
       ps=0
