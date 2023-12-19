@@ -5,7 +5,7 @@ program main
    !integer,parameter::n=13
    integer::a(n,n),i,j
    integer,parameter::mv(2,4)=reshape([-1,0,1,0,0,-1,0,1],shape=[2,4])
-   integer,parameter::up=2,down=1,left=3,right=4
+   integer,parameter::up=1,down=2,left=3,right=4
    integer::path(2,n,n),idx(2) ,p(n,n)
    open(10,file="data/17.txt")
    do i=1,n

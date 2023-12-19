@@ -120,8 +120,7 @@ program main
       end select
       read(hex(3:7),"(z5)")k
       !bond
-      num=num+abs(k*mv(1,m))
-      num=num+abs(k*mv(2,m))
+      num=num+abs(k)
       pos=pos+mv(:,m)*k
       !write(*,*)pos
       ps=ps+1
