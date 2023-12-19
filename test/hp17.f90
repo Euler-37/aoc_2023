@@ -84,6 +84,7 @@ contains
          end if
       end do
       write(*,*)res
+      call m%clean()
    end subroutine
 
    subroutine eq(a,b)

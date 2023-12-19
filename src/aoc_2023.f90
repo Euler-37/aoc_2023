@@ -136,6 +136,7 @@ contains
         integer::i
         integer(8)::g
         integer(8),parameter::PP=int(z"F0000000",8)
+        h=1
         do i=1,len(str)
             h=shiftl(h,4)+ichar(str(i:i))
             g=iand(h,pp)

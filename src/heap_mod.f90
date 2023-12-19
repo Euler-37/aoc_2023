@@ -9,6 +9,7 @@ module heap_mod
       procedure,pass::insert
       procedure,pass::pop
       procedure,pass::init
+      procedure,pass::clean
       final::final_heap
    end type heap
    abstract interface
@@ -114,5 +115,11 @@ contains
       if(allocated(this%val))deallocate(this%val)
       this%size=0
    end subroutine final_heap
+
+   subroutine clean(this)
+      class(heap),intent(inout)::this
+      if(allocated(this%val))deallocate(this%val)
+      this%size=0
+   end subroutine clean
 
 end module heap_mod
