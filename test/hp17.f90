@@ -34,12 +34,12 @@ contains
       integer::idx,res
       integer::ix,iy,jx,jy
       logical::ultra
-      call m%init(n*n*(12*5),node(0,0,0,0,0))
-      call m%insert(node(0,1,1,0,0), eq, cmp, sw)
+      call m%init(n*n*(12*5),node(0,0,0,0,0),eq,cmp,sw)
+      call m%insert(node(0,1,1,0,0))
       ps=0
       flag=0
       do while(m%size>0)
-         call m%pop(cmp, sw, eq, x)
+         call m%pop(x)
          idx=flag(x%mv,x%step,x%ix,x%iy)
          if(idx/=0)cycle
          ps=ps+1
@@ -52,20 +52,20 @@ contains
                if(ultra)then
                   if(i==x%mv)then
                      if(x%step+1<11)then
-                        call m%insert(node(x%lens+a(jx,jy),jx,jy,i,x%step+1), eq, cmp, sw)
+                        call m%insert(node(x%lens+a(jx,jy),jx,jy,i,x%step+1))
                      end if
                   else
                      if(x%step>3.or.x%mv==0)then
-                        call m%insert(node(x%lens+a(jx,jy),jx,jy,i,1), eq, cmp, sw)
+                        call m%insert(node(x%lens+a(jx,jy),jx,jy,i,1))
                      end if
                   end if
                else
                   if(i==x%mv)then
                      if(x%step+1<4)then
-                        call m%insert(node(x%lens+a(jx,jy),jx,jy,i,x%step+1), eq, cmp, sw)
+                        call m%insert(node(x%lens+a(jx,jy),jx,jy,i,x%step+1))
                      end if
                   else
-                     call m%insert(node(x%lens+a(jx,jy),jx,jy,i,1), eq, cmp, sw)
+                     call m%insert(node(x%lens+a(jx,jy),jx,jy,i,1))
                   end if
                end if
             end if
