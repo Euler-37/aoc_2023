@@ -4,8 +4,8 @@ module hashbit_mod
    private
    public::hashbit,hash_bit
    type :: hashbit
-      integer::num
-      integer::dimen
+      integer(8)::num
+      integer(8)::dimen
       integer(i8),allocatable::i(:)
    contains
       procedure,pass::init=>bit_init
@@ -16,9 +16,8 @@ module hashbit_mod
    end type hashbit
    integer,parameter::kd=storage_size(1_i8)
 contains
-   subroutine bit_clean(this,n)
+   subroutine bit_clean(this)
       class(hashbit),intent(inout)::this
-      integer,intent(in)::n
       this%num=0
       this%dimen=0
       deallocate(this%i)
@@ -26,7 +25,7 @@ contains
 
    subroutine bit_init(this,n)
       class(hashbit),intent(inout)::this
-      integer,intent(in)::n
+      integer(8),intent(in)::n
       this%num=n
       this%dimen=n/kd+merge(0,1,mod(n,kd)==0)
       allocate(this%i(0:this%dimen-1),source=0_i8)
@@ -34,8 +33,8 @@ contains
 
    subroutine bit_set(this,i)
       class(hashbit),intent(inout)::this
-      integer,intent(in)::i
-      integer::pos,idx
+      integer(8),intent(in)::i
+      integer(8)::pos,idx
       pos=i/kd    ! 8 , 0
       idx=modulo(i,kd)! 8 , 8
       this%i(pos)=ibset(this%i(pos),idx)
@@ -43,8 +42,8 @@ contains
 
    subroutine bit_clear(this,i)
       class(hashbit),intent(inout)::this
-      integer,intent(in)::i
-      integer::pos,idx
+      integer(8),intent(in)::i
+      integer(8)::pos,idx
       pos=i/kd    ! 8 , 0
       idx=modulo(i,kd)! 8 , 8
       this%i(pos)=ibclr(this%i(pos),idx)
@@ -52,17 +51,17 @@ contains
 
    logical function bit_get(this,i)result(res)
       class(hashbit),intent(inout)::this
-      integer,intent(in)::i
-      integer::pos,idx
+      integer(8),intent(in)::i
+      integer(8)::pos,idx
       pos=i/kd        ! 8 , 0
       idx=modulo(i,kd)! 8 , 8
       res=btest(this%i(pos),idx)
    end function bit_get
 
-   integer function hash_bit(a,b)result(res)
-      integer,intent(in)::a(:)
-      integer,intent(in)::b(:)
-      integer::n,i,idx
+   integer(8) function hash_bit(a,b)result(res)
+      integer(8),intent(in)::a(:)
+      integer(8),intent(in)::b(:)
+      integer(8)::n,i,idx
       n=size(a)
       idx=1
       res=a(n)
