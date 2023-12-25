@@ -20,6 +20,8 @@ program main
    end type sarray
    type(sarray)::val
    call grpah%init(eq,bit)
+   !
+   ! ifort only
    !---------------- read graph
    open(10,file="data/25.txt")
    do
@@ -30,8 +32,7 @@ program main
       s=split(trim(str)," ",.true.)
       if(.not.(s(1)%str.in.grpah)) call grpah%append(s(1)%str,val)
       pg=>grpah%view(s(1)%str)
-      select type(pg)
-      type is (sarray) 
+      select type(pg); type is (sarray) 
          do i=2,size(s)
             pg%size=pg%size+1
             pg%a(pg%size)=s(i)%str
@@ -40,8 +41,7 @@ program main
       do i=2,size(s)
          if(.not.(s(i)%str.in.grpah)) call grpah%append(s(i)%str,val)
          pg=>grpah%view(s(i)%str)
-         select type(pg)
-         type is (sarray) 
+         select type(pg); type is (sarray) 
             pg%size=pg%size+1
             pg%a(pg%size)=s(1)%str
          end select
@@ -79,8 +79,7 @@ program main
             do while(set_iter%next(key))
                nums=0
                pg=>grpah%view(key)
-               select type(pg)
-               type is (sarray) 
+               select type(pg); type is (sarray) 
                   do j=1,pg%size
                      if(pg%a(j).in.graph1)then
                         nums=nums+1
@@ -104,7 +103,10 @@ program main
             call graph2%remove(maxkey)
          end block
       end do
+      call graph1%clean()
+      call graph2%clean
    end do
+   call grpah%clean()
 contains  
    subroutine eq(a,b)
       class(*),intent(inout)::a
