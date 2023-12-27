@@ -95,6 +95,9 @@ program main
             ! cnt < 3 return
             if(cnt <=3)then
                write(*,*)i,graph1%num*graph2%num
+               call graph1%clean()
+               call graph2%clean()
+               call grpah%clean()
                stop
             end if
             ! else
@@ -104,7 +107,7 @@ program main
          end block
       end do
       call graph1%clean()
-      call graph2%clean
+      call graph2%clean()
    end do
    call grpah%clean()
 contains  

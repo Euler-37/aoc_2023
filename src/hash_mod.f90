@@ -25,7 +25,7 @@ module hash_mod
       type(pair),pointer::head=>null()
    end type pair_list
 
-   integer,parameter::mdim=1000
+   integer,parameter::mdim=997
    type hashmap
       integer::num
       type(pair_list)::a(mdim)
@@ -120,7 +120,7 @@ contains
       integer(1),allocatable::pk(:)
       integer(1),allocatable::pb(:)
       call this%bit(key, pk)
-      idx=mod(hash_code(pk),mdim)+1
+      idx=modulo(hash_code(pk),mdim)+1
       associate(t=>this%a(idx))
         if(.not.associated(t%head))then
             allocate(t%head)
@@ -159,7 +159,7 @@ contains
       integer(1),allocatable::pk(:)
       integer(1),allocatable::pb(:)
       call this%bit(key, pk)
-      idx=mod(hash_code(pk),mdim)+1
+      idx=modulo(hash_code(pk),mdim)+1
       associate(t=>this%a(idx))
          if(.not.associated(t%head))then
          else
@@ -190,7 +190,7 @@ contains
       integer(1),allocatable::pk(:)
       integer(1),allocatable::pb(:)
       call this%bit(key, pk)
-      idx=mod(hash_code(pk),mdim)+1
+      idx=modulo(hash_code(pk),mdim)+1
       associate(t=>this%a(idx))
          if(.not.associated(t%head))then
          else
@@ -221,7 +221,7 @@ contains
       integer(1),allocatable::pk(:)
       integer(1),allocatable::pb(:)
       call this%bit(key, pk)
-      idx=mod(hash_code(pk),mdim)+1
+      idx=modulo(hash_code(pk),mdim)+1
       val=.false.
       associate(t=>this%a(idx))
          if(.not.associated(t%head))then
@@ -254,7 +254,7 @@ contains
       integer(1),allocatable::pk(:)
       integer(1),allocatable::pb(:)
       call this%bit(key, pk)
-      idx=mod(hash_code(pk),mdim)+1
+      idx=modulo(hash_code(pk),mdim)+1
       associate(t=>this%a(idx))
          if(.not.associated(t%head))then
             return
